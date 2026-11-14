@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#0B1B2B">
+<title>Saiprasad Caterers & Decorators · महाराष्ट्रीयन मेनू</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ============ RESET & VARIABLES ============ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --saffron:#FF9933;--chilli:#E63946;--navy:#0B1B2B;--cream:#FFF8E7;
+  --cream-dim:#F5E6C8;--navy-light:#1B2F44;--gold:#FFD166;
+  --shadow-sm:0 2px 8px rgba(11,27,43,.12);
+  --shadow-md:0 8px 24px rgba(11,27,43,.18);
+  --shadow-lg:0 16px 40px rgba(11,27,43,.24);
+  --r-sm:12px;--r-md:20px;--r-lg:32px;
+  --bounce:cubic-bezier(.34,1.56,.64,1);
+  --smooth:cubic-bezier(.22,.61,.36,1);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--cream);color:var(--navy);
+  font-family:'Poppins','Noto Sans Devanagari',system-ui,-apple-system,sans-serif;
+  line-height:1.55;min-height:100vh;overflow-x:hidden;padding-bottom:3rem;
+}
+h1,h2,h3,h4,h5,.brand,.hero-title,.section-title{font-family:'Bricolage Grotesque','Noto Sans Devanagari','Poppins',sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+a{color:inherit;text-decoration:none}
+button{font-family:'Poppins','Noto Sans Devanagari',sans-serif;cursor:pointer;background:none;border:none;color:inherit;transition:all .2s var(--smooth)}
+input,select,textarea{font-family:'Poppins','Noto Sans Devanagari',sans-serif;background:#fff;border:2px solid rgba(11,27,43,.12);color:var(--navy);border-radius:var(--r-sm);padding:.85rem 1.1rem;width:100%;outline:none;transition:border .2s,box-shadow .2s;font-size:.95rem}
+input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0 0 0 4px rgba(255,153,51,.2)}
+::placeholder{color:#8B9AAB}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+
+/* ============ LAYOUT ============ */
+.container{max-width:1400px;margin:0 auto;padding:0 1.25rem}
+
+/* ============ HERO ============ */
+.hero{background:linear-gradient(145deg,var(--navy) 0%,var(--navy-light) 100%);border-radius:0 0 40px 40px;padding:1.5rem 0 3.5rem;margin-bottom:2rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,153,51,.25) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:floatOrb 12s ease-in-out infinite}
+.hero::after{content:'';position:absolute;bottom:-30%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(230,57,70,.2) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:floatOrb 15s ease-in-out infinite reverse}
+@keyframes floatOrb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-30px) scale(1.1)}}
+
+.header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 0 1rem;gap:1rem;position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:.75rem;font-size:1.7rem;font-weight:800;color:var(--cream);text-shadow:0 2px 8px rgba(0,0,0,.3)}
+.brand i{color:var(--saffron);font-size:2rem;filter:drop-shadow(0 0 12px rgba(255,153,51,.5))}
+.brand span{color:var(--saffron);font-weight:600;font-size:.95rem;margin-left:.2rem;letter-spacing:.02em;font-family:'Noto Sans Devanagari','Poppins',sans-serif}
+.restaurant-info{display:flex;flex-wrap:wrap;gap:1rem;font-size:.82rem;color:var(--cream-dim);background:rgba(255,255,255,.08);backdrop-filter:blur(6px);padding:.6rem 1.2rem;border-radius:50px;border:1px solid rgba(255,153,51,.25)}
+.restaurant-info i{color:var(--saffron);margin-right:.35rem}
+
+/* ============ ANIMATED CENTER LOGO ============ */
+.hero-content{position:relative;z-index:2;text-align:center;padding:1.2rem 0 .5rem}
+
+.logo-stage{
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.5rem;
+  position:relative;
+  width:100%;
+  max-width:560px;
+  min-height:185px;
+}
+.logo-orbit{
+  position:absolute;
+  inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+.logo-orbit::before,
+.logo-orbit::after{
+  content:'';
+  position:absolute;
+  border-radius:50%;
+  border:1.5px dashed rgba(255,153,51,.35);
+}
+.logo-orbit::before{
+  width:210px;height:210px;
+  animation:spinSlow 20s linear infinite;
+}
+.logo-orbit::after{
+  width:290px;height:290px;
+  border-style:solid;
+  border-color:rgba(230,57,70,.18);
+  animation:spinSlow 30s linear infinite reverse;
+}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
+
+.logo-orb{
+  position:absolute;
+  width:14px;height:14px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,var(--gold),var(--saffron));
+  box-shadow:0 0 20px rgba(255,153,51,.8),0 0 40px rgba(255,153,51,.4);
+}
+.logo-orb.o1{animation:orbit1 8s linear infinite}
+.logo-orb.o2{width:10px;height:10px;background:radial-gradient(circle at 30% 30%,#fff,var(--chilli));box-shadow:0 0 18px rgba(230,57,70,.9);animation:orbit2 12s linear infinite reverse}
+.logo-orb.o3{width:8px;height:8px;background:radial-gradient(circle at 30% 30%,#fff,var(--gold));box-shadow:0 0 14px rgba(255,209,102,.9);animation:orbit3 10s linear infinite}
+@keyframes orbit1{from{transform:rotate(0deg) translateX(105px) rotate(0deg)}to{transform:rotate(360deg) translateX(105px) rotate(-360deg)}}
+@keyframes orbit2{from{transform:rotate(0deg) translateX(145px) rotate(0deg)}to{transform:rotate(360deg) translateX(145px) rotate(-360deg)}}
+@keyframes orbit3{from{transform:rotate(0deg) translateX(75px) rotate(0deg)}to{transform:rotate(360deg) translateX(75px) rotate(-360deg)}}
+
+.logo-core{
+  position:relative;
+  z-index:3;
+  background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.02));
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1.5px solid rgba(255,153,51,.45);
+  border-radius:32px;
+  padding:1.4rem 2.6rem;
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.4),
+    0 0 0 1px rgba(255,153,51,.15) inset,
+    0 0 60px rgba(255,153,51,.2);
+  animation:corePulse 4s ease-in-out infinite;
+  overflow:hidden;
+}
+.logo-core::before{
+  content:'';
+  position:absolute;
+  top:-50%;left:-50%;
+  width:200%;height:200%;
+  background:linear-gradient(45deg,transparent 30%,rgba(255,153,51,.15) 50%,transparent 70%);
+  animation:shimmer 3.5s ease-in-out infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
+@keyframes corePulse{0%,100%{box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 0 1px rgba(255,153,51,.15) inset,0 0 60px rgba(255,153,51,.2)}50%{box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 0 1px rgba(255,153,51,.3) inset,0 0 80px rgba(255,153,51,.35)}}
+
+.logo-mark{display:flex;align-items:center;justify-content:center;gap:.7rem}
+.logo-mark i{
+  font-size:2.3rem;
+  color:var(--saffron);
+  filter:drop-shadow(0 0 12px rgba(255,153,51,.7));
+  animation:iconBob 2.5s ease-in-out infinite;
+}
+@keyframes iconBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(-8deg)}}
+
+.logo-name{
+  font-family:'Bricolage Grotesque','Poppins',sans-serif;
+  font-weight:800;
+  font-size:clamp(1.85rem,5.2vw,2.7rem);
+  letter-spacing:-.03em;
+  line-height:1;
+  background:linear-gradient(120deg,#FFF8E7 20%,var(--saffron) 45%,var(--gold) 55%,#FFF8E7 80%);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shineText 4s linear infinite;
+  text-align:center;
+}
+@keyframes shineText{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.logo-tag{
+  font-family:'Poppins',sans-serif;
+  font-weight:600;
+  font-size:.82rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--saffron);
+  opacity:.9;
+  margin-top:.15rem;
+}
+
+.hero-title{font-size:clamp(1.6rem,4.5vw,2.6rem);color:var(--cream);margin-bottom:.5rem;line-height:1.2}
+.hero-title .highlight{color:var(--saffron);position:relative;display:inline-block}
+.hero-title .highlight::after{content:'';position:absolute;bottom:.05em;left:0;right:0;height:.12em;background:var(--chilli);border-radius:4px}
+.hero-sub{font-size:1rem;color:var(--cream-dim);max-width:650px;margin:.6rem auto 1.6rem;font-weight:400;opacity:.92}
+.hero-cta{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center}
+.btn-primary{background:var(--saffron);color:var(--navy);font-weight:700;padding:.9rem 2.2rem;border-radius:60px;font-size:1rem;display:inline-flex;align-items:center;gap:.6rem;box-shadow:0 6px 20px rgba(255,153,51,.4);transition:transform .25s var(--bounce),box-shadow .25s}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 28px rgba(255,153,51,.55)}
+.btn-outline{background:transparent;color:var(--cream);font-weight:600;padding:.9rem 2.2rem;border-radius:60px;font-size:1rem;display:inline-flex;align-items:center;gap:.6rem;border:2px solid rgba(255,248,231,.4);transition:all .25s var(--smooth)}
+.btn-outline:hover{border-color:var(--saffron);color:var(--saffron);background:rgba(255,153,51,.1)}
+.hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(230,57,70,.92);color:#fff;font-size:.78rem;font-weight:600;padding:.4rem 1.1rem;border-radius:40px;margin-bottom:.8rem;letter-spacing:.04em}
+
+/* ============ SEARCH & CATEGORIES ============ */
+.search-section{display:flex;flex-direction:column;gap:1.1rem;margin:0 0 2rem;position:relative;z-index:5}
+.search-wrapper{display:flex;align-items:center;background:#fff;border-radius:60px;border:2px solid rgba(11,27,43,.08);padding:.25rem .25rem .25rem 1.4rem;box-shadow:var(--shadow-sm);transition:box-shadow .3s,border .3s;max-width:660px;margin:0 auto;width:100%}
+.search-wrapper:focus-within{border-color:var(--saffron);box-shadow:0 0 0 5px rgba(255,153,51,.15),var(--shadow-md)}
+.search-wrapper i{color:var(--saffron);font-size:1.15rem}
+.search-wrapper input{border:none;background:transparent;box-shadow:none;padding:.85rem 1rem;font-size:1rem;color:var(--navy)}
+.search-wrapper input:focus{box-shadow:none}
+.search-wrapper button{background:var(--navy);color:var(--cream);font-weight:600;padding:.8rem 1.8rem;border-radius:60px;font-size:.95rem;transition:all .25s var(--smooth);white-space:nowrap}
+.search-wrapper button:hover{background:var(--saffron);color:var(--navy)}
+
+.categories{
+  display:flex;
+  gap:.65rem;
+  padding:.5rem .2rem .8rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.cat-btn{
+  background:#fff;
+  border:2px solid rgba(11,27,43,.08);
+  color:var(--navy);
+  padding:.6rem 1.25rem;
+  border-radius:50px;
+  font-size:.88rem;
+  font-weight:600;
+  white-space:nowrap;
+  transition:all .25s var(--bounce);
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  box-shadow:var(--shadow-sm);
+}
+.cat-btn i{font-size:.82rem;color:var(--saffron)}
+.cat-btn:hover{border-color:var(--saffron);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.cat-btn.active{
+  background:var(--navy);
+  border-color:var(--navy);
+  color:var(--cream);
+  box-shadow:0 6px 20px rgba(11,27,43,.3);
+}
+.cat-btn.active i{color:var(--saffron)}
+
+/* ============ CATERING MENU GRID ============ */
+.menu-section{margin-top:1rem}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.5rem}
+.section-title{font-size:1.9rem;color:var(--navy);display:flex;align-items:center;gap:.6rem}
+.section-title i{color:var(--chilli);font-size:1.5rem}
+.section-sub{color:#5A6B7C;font-size:.95rem;font-weight:500}
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin:1.5rem 0 2.5rem}
+.menu-card{
+  background:#fff;
+  border-radius:var(--r-md);
+  overflow:hidden;
+  transition:transform .3s var(--bounce),box-shadow .3s var(--smooth);
+  box-shadow:var(--shadow-sm);
+  display:flex;
+  flex-direction:column;
+  border:1px solid rgba(11,27,43,.07);
+  position:relative;
+}
+.menu-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.card-top-bar{
+  background:linear-gradient(90deg,var(--navy) 0%,var(--navy-light) 100%);
+  padding:.9rem 1.3rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  border-bottom:3px solid var(--saffron);
+}
+.card-cat-badge{
+  background:var(--chilli);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:700;
+  padding:.25rem .8rem;
+  border-radius:40px;
+  letter-spacing:.03em;
+}
+.card-count-badge{
+  color:var(--gold);
+  font-size:.8rem;
+  font-weight:600;
+}
+.card-content{padding:1.35rem;display:flex;flex-direction:column;flex:1}
+.card-title{font-size:1.3rem;color:var(--navy);margin-bottom:.2rem}
+.card-subtitle{font-size:.85rem;color:#7A8B9C;margin-bottom:.9rem;font-weight:500}
+
+.items-chip-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem;
+  margin-bottom:1.1rem;
+  flex:1;
+}
+.dish-chip{
+  background:var(--cream);
+  color:var(--navy);
+  border:1.5px solid rgba(11,27,43,.1);
+  padding:.38rem .78rem;
+  border-radius:50px;
+  font-size:.85rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:all .2s var(--bounce);
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+}
+.dish-chip:hover{
+  border-color:var(--saffron);
+  background:#FFF1D6;
+  transform:translateY(-1px);
+}
+.dish-chip.selected{
+  background:var(--navy);
+  color:var(--cream);
+  border-color:var(--navy);
+  box-shadow:0 3px 10px rgba(11,27,43,.2);
+}
+.dish-chip.selected i{color:var(--saffron)}
+
+.card-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  padding-top:.9rem;
+  border-top:1px dashed rgba(11,27,43,.12);
+  margin-top:auto;
+}
+.selected-hint{font-size:.82rem;color:#5A6B7C;font-weight:500}
+.select-all-btn{
+  background:var(--cream);
+  color:var(--navy);
+  font-weight:600;
+  padding:.5rem 1rem;
+  border-radius:50px;
+  font-size:.82rem;
+  border:1.5px solid rgba(11,27,43,.12);
+}
+.select-all-btn:hover{background:var(--saffron);border-color:var(--saffron)}
+
+/* ============ STICKY CART ============ */
+.sticky-cart{position:fixed;bottom:1.75rem;right:1.75rem;z-index:1000;background:var(--navy);border-radius:60px;padding:.85rem 1.6rem .85rem 1.8rem;display:flex;align-items:center;gap:.9rem;box-shadow:var(--shadow-lg),0 0 0 3px var(--saffron);cursor:pointer;transition:transform .3s var(--bounce),box-shadow .3s;color:var(--cream);font-weight:600;font-size:.95rem}
+.sticky-cart:hover{transform:scale(1.05) translateY(-3px);box-shadow:var(--shadow-lg),0 0 0 4px var(--saffron),0 0 24px rgba(255,153,51,.5)}
+.sticky-cart i{color:var(--saffron);font-size:1.3rem}
+.sticky-cart .cart-count{background:var(--saffron);color:var(--navy);border-radius:40px;padding:.15rem .75rem;font-weight:800;font-size:.9rem}
+
+/* ============ CART PANEL ============ */
+.cart-panel{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;pointer-events:none;z-index:2000;padding:1rem}
+.cart-panel.open{pointer-events:auto}
+.cart-overlay{position:absolute;inset:0;background:rgba(11,27,43,.55);backdrop-filter:blur(4px);opacity:0;transition:opacity .3s var(--smooth);pointer-events:none}
+.cart-panel.open .cart-overlay{opacity:1;pointer-events:auto}
+.cart-drawer{position:relative;width:100%;max-width:560px;max-height:92vh;background:#fff;border-radius:32px 32px 24px 24px;box-shadow:0 -12px 48px rgba(11,27,43,.25);padding:1.8rem 1.6rem 1.5rem;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .4s var(--bounce);overflow-y:auto;pointer-events:auto;border-top:5px solid var(--saffron)}
+.cart-panel.open .cart-drawer{transform:translateY(0)}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.1rem}
+.cart-header h3{font-size:1.45rem;color:var(--navy);display:flex;align-items:center;gap:.6rem}
+.cart-header h3 i{color:var(--saffron)}
+.close-cart{background:var(--cream);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--navy)}
+.close-cart:hover{background:var(--chilli);color:#fff;transform:rotate(90deg)}
+
+.cart-items{flex:1;overflow-y:auto;margin:.4rem 0 1rem;max-height:38vh;padding-right:.3rem}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.75rem 1rem;margin-bottom:.55rem;background:var(--cream);border-radius:14px;border:1.5px solid rgba(11,27,43,.08)}
+.cart-item-info{display:flex;flex-direction:column;min-width:0}
+.cart-item-title{font-weight:700;color:var(--navy);font-size:.98rem}
+.cart-item-cat{font-size:.78rem;color:#7A8B9C}
+.remove-item-btn{background:#fff;color:var(--chilli);border:1.5px solid rgba(230,57,70,.25);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.remove-item-btn:hover{background:var(--chilli);color:#fff}
+
+.clear-all-row{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-top:2px dashed rgba(11,27,43,.12);margin-top:.3rem;font-weight:700}
+.clear-btn{color:var(--chilli);font-size:.85rem;font-weight:600;text-decoration:underline}
+
+.checkout-section{margin:.7rem 0 .4rem}
+.checkout-section h4{font-size:.98rem;color:var(--navy);margin-bottom:.75rem;font-weight:700;display:flex;align-items:center;gap:.45rem}
+.checkout-section h4 i{color:var(--chilli)}
+.checkout-fields{display:flex;flex-direction:column;gap:.75rem;margin-bottom:.9rem}
+.checkout-row-2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.checkout-fields input,.checkout-fields select,.checkout-fields textarea{background:var(--cream);border:2px solid rgba(11,27,43,.08)}
+.checkout-fields input:focus,.checkout-fields select:focus,.checkout-fields textarea:focus{background:#fff;border-color:var(--saffron)}
+
+.whatsapp-btn{background:#25D366;color:#fff;font-weight:700;padding:1.05rem;border-radius:60px;display:flex;align-items:center;justify-content:center;gap:.7rem;font-size:1.02rem;box-shadow:0 8px 24px rgba(37,211,102,.35);margin-top:.5rem}
+.whatsapp-btn i{font-size:1.3rem}
+.whatsapp-btn:hover{background:#20BA5A;transform:translateY(-2px)}
+.empty-cart{text-align:center;color:#8B9AAB;padding:2rem 1rem;font-size:.95rem;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.empty-cart i{font-size:2.3rem;color:var(--saffron);opacity:.6}
+
+/* ============ TOAST ============ */
+.toast{position:fixed;bottom:5.5rem;right:1.5rem;background:var(--navy);color:var(--cream);padding:.85rem 1.4rem;border-radius:50px;font-size:.9rem;font-weight:500;box-shadow:var(--shadow-lg);border-left:4px solid var(--saffron);z-index:3000;opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s var(--bounce);pointer-events:none;display:flex;align-items:center;gap:.6rem;max-width:calc(100vw - 3rem)}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast i{color:var(--saffron)}
+
+/* ============ FOOTER ============ */
+.footer{text-align:center;padding:2rem 1rem 1rem;color:#5A6B7C;font-size:.88rem;border-top:1px solid rgba(11,27,43,.08);margin-top:2.5rem;line-height:1.7}
+.footer strong{color:var(--navy)}
+.footer i{color:var(--chilli)}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:768px){
+  .hero{padding:1rem 0 2.5rem;border-radius:0 0 28px 28px}
+  .header{flex-direction:column;align-items:flex-start;gap:.8rem}
+  .brand{font-size:1.45rem}
+  .restaurant-info{font-size:.76rem;padding:.5rem 1rem;gap:.65rem}
+  .logo-stage{min-height:160px}
+  .logo-core{padding:1.1rem 1.6rem;border-radius:26px}
+  .logo-name{font-size:1.75rem}
+  .logo-tag{font-size:.72rem;letter-spacing:.16em}
+  .menu-grid{grid-template-columns:1fr;gap:1.2rem}
+  .section-title{font-size:1.55rem}
+  .sticky-cart{bottom:1rem;right:1rem;padding:.75rem 1.3rem;font-size:.88rem}
+  .cart-drawer{padding:1.4rem 1.1rem 1.1rem;max-height:95vh;max-width:100%}
+  .checkout-row-2{grid-template-columns:1fr}
+  .categories{justify-content:flex-start}
+  .toast{bottom:4.5rem;right:1rem;left:1rem;max-width:none}
+}
+@media (max-width:480px){
+  .container{padding:0 .9rem}
+  .logo-name{font-size:1.45rem}
+  .logo-tag{font-size:.64rem}
+}
+:focus-visible{outline:3px solid var(--saffron);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <header class="header">
+      <div class="brand">
+        <i class="fas fa-utensils"></i>
+        Saiprasad Caterers
+        <span>साईप्रसाद केटरर्स</span>
+      </div>
+      <div class="restaurant-info">
+        <span><i class="fas fa-map-pin"></i> Dadar (East), Mumbai 400 014</span>
+        <span><i class="fas fa-phone"></i> 24166761 / 9867782023</span>
+      </div>
+    </header>
+
+    <div class="hero-content">
+      <!-- ANIMATED LOGO -->
+      <div class="logo-stage" aria-label="Saiprasad Caterers & Decorators Logo">
+        <div class="logo-orbit">
+          <span class="logo-orb o1"></span>
+          <span class="logo-orb o2"></span>
+          <span class="logo-orb o3"></span>
+        </div>
+        <div class="logo-core">
+          <div class="logo-mark">
+            <i class="fas fa-concierge-bell"></i>
+          </div>
+          <div class="logo-name">SAIPRASAD</div>
+          <div class="logo-tag">Caterers &amp; Decorators</div>
+        </div>
+      </div>
+
+      <div class="hero-badge"><i class="fas fa-fire"></i> अस्सल महाराष्ट्रीयन मेजवानी</div>
+      <h1 class="hero-title">पारंपरिक चव.<br><span class="highlight">शाही केटरिंग</span> मेनू.</h1>
+      <p class="hero-sub">लग्न समारंभ, मुंज, साखरपुडा, वाढदिवस व सर्व शुभ कार्यांसाठी तुमचा आवडता महाराष्ट्रीयन मेनू निवडा आणि थेट WhatsApp वर कोटेशन मागवा.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" id="heroOrderBtn"><i class="fas fa-clipboard-list"></i> निवडलेला मेनू पहा</button>
+        <button class="btn-outline" id="heroMenuBtn"><i class="fas fa-book-open"></i> संपूर्ण मेनू पहा</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="container">
+  <div class="search-section" id="menuSection">
+    <div class="search-wrapper">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="पदार्थ शोधा (उदा. पोहे, पुरण पोळी, आमटी, मसालेभात, श्रीखंड...)" aria-label="पदार्थ शोधा">
+      <button id="searchBtn">शोधा</button>
+    </div>
+    <div class="categories" id="categoryContainer">
+      <button class="cat-btn active" data-category="all"><i class="fas fa-asterisk"></i> सर्व विभाग</button>
+      <button class="cat-btn" data-category="nyahari"><i class="fas fa-sun"></i> न्याहरी</button>
+      <button class="cat-btn" data-category="upvas"><i class="fas fa-leaf"></i> उपवासाचे पदार्थ</button>
+      <button class="cat-btn" data-category="farsan"><i class="fas fa-fire"></i> फरसाण</button>
+      <button class="cat-btn" data-category="sweet"><i class="fas fa-star"></i> गोड पदार्थ</button>
+      <button class="cat-btn" data-category="rice"><i class="fas fa-bowl-rice"></i> भाताचे प्रकार</button>
+      <button class="cat-btn" data-category="dal"><i class="fas fa-spoon"></i> डाळीचे प्रकार</button>
+      <button class="cat-btn" data-category="bhaji"><i class="fas fa-carrot"></i> भाजी प्रकार</button>
+      <button class="cat-btn" data-category="usal"><i class="fas fa-seedling"></i> उसळ प्रकार</button>
+      <button class="cat-btn" data-category="salad"><i class="fas fa-lemon"></i> कोशिंबीर व पचडी</button>
+      <button class="cat-btn" data-category="pickle"><i class="fas fa-pepper-hot"></i> लोणचं व चटणी</button>
+      <button class="cat-btn" data-category="drinks"><i class="fas fa-glass-water"></i> शीतपेय</button>
+    </div>
+  </div>
+
+  <section class="menu-section">
+    <div class="section-header">
+      <h2 class="section-title"><i class="fas fa-bowl-food"></i> महाराष्ट्रीयन मेनू</h2>
+      <span class="section-sub">मेनूमध्ये समाविष्ट करण्यासाठी पदार्थांवर क्लिक करा</span>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+</div>
+
+<!-- STICKY CART -->
+<button class="sticky-cart" id="stickyCart" aria-label="निवडलेला मेनू उघडा">
+  <i class="fas fa-clipboard-check"></i>
+  <span>निवडलेला मेनू</span>
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- CART PANEL -->
+<div class="cart-panel" id="cartPanel" role="dialog" aria-modal="true" aria-label="निवडलेला केटरिंग मेनू">
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer">
+    <div class="cart-header">
+      <h3><i class="fas fa-clipboard-check"></i> तुमचा निवडलेला मेनू</h3>
+      <button class="close-cart" id="closeCart" aria-label="बंद करा"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="clear-all-row">
+      <span>एकूण निवडलेले पदार्थ: <strong id="totalSelectedText" style="color:var(--chilli);">0</strong></span>
+      <button class="clear-btn" id="clearCartBtn">सर्व काढा</button>
+    </div>
+
+    <!-- EVENT & CUSTOMER DETAILS -->
+    <div class="checkout-section">
+      <h4><i class="fas fa-calendar-check"></i> कार्यक्रमाची माहिती (Quotation साठी)</h4>
+      <div class="checkout-fields">
+        <input type="text" id="customerName" placeholder="तुमचे पूर्ण नाव *" autocomplete="name">
+        <div class="checkout-row-2">
+          <input type="tel" id="customerPhone" placeholder="मोबाईल नंबर *" autocomplete="tel" inputmode="tel">
+          <input type="number" id="guestCount" placeholder="अंदाजे पाहुणे (उदा. 200)" min="10">
+        </div>
+        <div class="checkout-row-2">
+          <input type="date" id="eventDate" aria-label="कार्यक्रमाची तारीख">
+          <select id="eventType" aria-label="कार्यक्रमाचा प्रकार">
+            <option value="लग्न समारंभ">लग्न समारंभ (Wedding)</option>
+            <option value="साखरपुडा">साखरपुडा (Engagement)</option>
+            <option value="मुंज">मुंज (Thread Ceremony)</option>
+            <option value="वाढदिवस">वाढदिवस (Birthday)</option>
+            <option value="वास्तुशांत / पूजा">वास्तुशांत / पूजा</option>
+            <option value="इतर शुभ कार्य">इतर शुभ कार्य</option>
+          </select>
+        </div>
+        <textarea id="eventVenue" rows="2" placeholder="कार्यक्रमाचे ठिकाण / पत्ता (ऐच्छिक)"></textarea>
+      </div>
+    </div>
+
+    <button class="whatsapp-btn" id="whatsappBtn">
+      <i class="fab fa-whatsapp"></i> WhatsApp वर मेनू व दर विचारा
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer class="footer">
+  <p><strong>SAIPRASAD Caterers &amp; Decorators</strong></p>
+  <p>102-A/13, Madhav Wadi, M. M. G. S. Marg, Dadar (East), Mumbai 400 014</p>
+  <p><i class="fas fa-phone-alt"></i> Tel.: 24166761 / 9867782023</p>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ============ CONFIG ============ */
+  const WHATSAPP_NUMBER = '919867782023';
+
+  /* ============ CATERING MENU DATA (FROM BROCHURE) ============ */
+  const menuSections = [
+    {
+      id: 'nyahari',
+      category: 'nyahari',
+      badge: 'न्याहरी',
+      title: 'न्याहरी (Breakfast & Snacks)',
+      subtitle: 'सकाळच्या व संध्याकाळच्या नाश्त्याचे चविष्ट पदार्थ',
+      items: [
+        'कांदा पोहे', 'बटाटा पोहे', 'उपिट', 'व्हेज उपिट', 'समोसा',
+        'गोड शिरा', 'अननस शिरा', 'बटाटावडा', 'थालीपीठ', 'मिक्सभजी',
+        'कांदा भजी', 'मिसळपाव', 'उसळपाव', 'कटवडा', 'कोथिंबीर वडी',
+        'वाटाणा पॅटीस', 'दडपे पोहे', 'आंबोळी चटणी', 'आंबोळी उसळ',
+        'घावणे उसळ', 'घावणे चटणी', 'मुंबई वडापाव'
+      ]
+    },
+    {
+      id: 'upvas',
+      category: 'upvas',
+      badge: 'उपवास',
+      title: 'उपवासाचे पदार्थ (Fasting Specials)',
+      subtitle: 'खास उपवासासाठी सात्विक व खमंग पदार्थ',
+      items: [
+        'साबुदाणा खिचडी', 'साबुदाणा वडा', 'साबुदाणा पुरी', 'उपवास कचोरी',
+        'चिप्स', 'फराळी मिसळ', 'राजगिरा पुरी', 'शेंगदाणा उसळ',
+        'वरीचा भात', 'उपवास कढी', 'शेंगदाणा पिठलं', 'उपवास भगर',
+        'उपवास बटाटा वडा', 'उपवास वडा उसळ'
+      ]
+    },
+    {
+      id: 'farsan',
+      category: 'farsan',
+      badge: 'फरसाण',
+      title: 'फरसाण (Crispy Savouries)',
+      subtitle: 'ताटाची रंगत वाढवणारे गरमागरम फरसाण प्रकार',
+      items: [
+        'कांदा भजी', 'बटाटा भजी', 'पालक भजी', 'सिमला भजी', 'फ्लॉवर भजी',
+        'केळं भजी', 'मुंग भजी', 'मेथी भजी', 'केळं काप', 'सुरण काप',
+        'बटाटा काप', 'वांगी काप', 'निरफणस काप', 'कोथिंबीर वडी',
+        'अळू वडी', 'कोबी वडी', 'भाज्यांचं कटलेट'
+      ]
+    },
+    {
+      id: 'sweet',
+      category: 'sweet',
+      badge: 'गोड पदार्थ',
+      title: 'गोड पदार्थ (Traditional Sweets)',
+      subtitle: 'शुभ कार्यासाठी अस्सल पारंपरिक पक्वान्ने',
+      items: [
+        'श्रीखंड', 'आम्रखंड', 'केसरी श्रीखंड', 'जिलेबी',
+        'बासुंदी (प्लेन)', 'केसर बासुंदी', 'सीताफळ बासुंदी', 'अंगुर बासुंदी', 'स्ट्रॉबेरी बासुंदी',
+        'तांदूळ खीर', 'रवा खीर', 'साबुदाणा खीर', 'रताळ्याची खीर', 'शेवया खीर',
+        'मनगण (गोवा)', 'लापशी', 'गव्हाची खीर', 'शिरा', 'पुरण पोळी',
+        'उकडीचे मोदक', 'तळणीचे मोदक', 'आमरस', 'सांजोरी', 'तेलपोळी', 'गुळपोळी'
+      ]
+    },
+    {
+      id: 'rice',
+      category: 'rice',
+      badge: 'भाताचे प्रकार',
+      title: 'भाताचे प्रकार (Rice Varieties)',
+      subtitle: 'सुवासिक आणि चविष्ट भाताचे विविध प्रकार',
+      items: [
+        'साधा भात', 'मिक्स कडधान्य भात', 'वांगी भात',
+        'हिरव्या तुरीच्या दाण्याची खिचडी (विदर्भ)', 'मसालेभात', 'मसाला पुलाव',
+        'मटार खिचडी', 'वाटाणे भात', 'मुगाची खिचडी', 'वाल भात',
+        'तोंडली भात वर्हाडी', 'पुदिना भात', 'खिचडी आंबे भात',
+        'डाळिंबी भात', 'मसूर भात', 'दोडक्याचा भात', 'व्हेज पुलाव',
+        'मटकी भात', 'केसरी भात', 'साखर भात', 'मसालेदार खिचडी',
+        'पालक भात', 'टोमॅटो भात', 'फोडणीचा भात', 'नागपुरी गोळे भात'
+      ]
+    },
+    {
+      id: 'dal',
+      category: 'dal',
+      badge: 'डाळीचे प्रकार',
+      title: 'डाळीचे प्रकार (Varan, Amti & Kadhi)',
+      subtitle: 'पारंपरिक वरण, आमटी आणि कढीचे प्रकार',
+      items: [
+        'वरण', 'मालवण स्पेशल आमटी', 'चण्याची आमटी', 'मेतकूट',
+        'टोमॅटो सार', 'फोडणी वरण', 'झिरक कटाची आमटी', 'कढी',
+        'कुलथाची पिठी', 'नारळाचे सार', 'वरणफळ', 'गरम मसाला आमटी',
+        'ताकाची कढी', 'उडीदाचे वरण', 'शेंगदाण्याची आमटी',
+        'टोमॅटो कढी', 'डाळ', 'मुगाची आमटी', 'पंचामृत कढी',
+        'पालक डाळ', 'शेंग आमटी', 'कांदा आमटी', 'फुटी कढी', 'डाळ मेथी'
+      ]
+    },
+    {
+      id: 'bhaji',
+      category: 'bhaji',
+      badge: 'भाजी प्रकार',
+      title: 'भाजी प्रकार (Main Course Sabzi)',
+      subtitle: 'गावरान व पारंपरिक पद्धतीच्या चवदार भाज्या',
+      items: [
+        'कुरमा', 'कुळताच पिठलं', 'बटाटा सुखी भाजी', 'झुणका', 'शेव भाजी',
+        'कोबी वाटाणा पंचमेल भाजी', 'मेथी पिठल', 'भोगीची भाजी', 'डाळ मेथी',
+        'लाल भोपळा भाजी', 'गवार भोपळा शेवग्याची भाजी', 'पालेभाजी',
+        'बटाटा लाल भाजी', 'वालाचे बिर्डे', 'काळा वाटाणा', 'सांबार वाटाणा टोमॅटो',
+        'भरलेली तोंडली', 'अळूची फतफत', 'भरलेली वांगी', 'वांग्याचं भरीत',
+        'चवळी बटाटा', 'शेंग बटाटा', 'लाल माठ', 'मुळा भाजी', 'पालक भाजी',
+        'मेथी भाजी', 'कारली भाजी', 'काजू उसळ', 'परतलेली भेंडी',
+        'पातोडी रस्सा', 'तांबडा रस्सा', 'पांढरा रस्सा',
+        'पडवळ चणा डाळ', 'दुधी चणाडाळ', 'अलसाना उसळ (गोवा)'
+      ]
+    },
+    {
+      id: 'usal',
+      category: 'usal',
+      badge: 'उसळ प्रकार',
+      title: 'उसळ प्रकार (Traditional Usal)',
+      subtitle: 'कडधान्यांच्या झणझणीत व चविष्ट उसळी',
+      items: [
+        'मुग उसळ', 'मटकी उसळ', 'चना उसळ', 'वाटाणा उसळ',
+        'चवळी उसळ', 'मिक्स कडधान्य उसळ', 'काळा वाटाणा उसळ', 'काजू उसळ'
+      ]
+    },
+    {
+      id: 'salad',
+      category: 'salad',
+      badge: 'कोशिंबीर व पचडी',
+      title: 'कोशिंबीर व पचडी (Salads & Pachadi)',
+      subtitle: 'ताज्या फळांच्या व भाज्यांच्या कोशिंबिरी',
+      items: [
+        'खमंग काकडी मिक्स कोशिंबीर', 'पेरूची कोशिंबीर', 'गाजर बिट कोशिंबीर',
+        'केळी कोशिंबीर', 'गाजर पचडी', 'काकडी बिट पचडी', 'पूर्णहार कोशिंबीर',
+        'इंद्रधनुष सलाड', 'फ्रुट सलाड', 'चण्याचे सलाड', 'केळ्याचे सलाड', 'डांगर'
+      ]
+    },
+    {
+      id: 'pickle',
+      category: 'pickle',
+      badge: 'लोणचं व चटणी',
+      title: 'लोणचं, ठेचा व चटणी प्रकार',
+      subtitle: 'जेवणाची लज्जत वाढवणारे झणझणीत प्रकार',
+      items: [
+        'कैरी लोणचं', 'आवळा लोणचं', 'लिंबू लोणचं', 'करवंद लोणचं',
+        'मिक्स लोणचं', 'मिरची लोणचं', 'लसूण चटणी', 'टोमॅटो चटणी',
+        'कैरी चटणी', 'मालवणी चटणी', 'पुदिना चटणी', 'ठेचा प्रकार',
+        'पुणेरी चटणी', 'सोलापुरी शेंगदाणा चटणी', 'कोल्हापुरी चटणी',
+        'सातारी चटणी', 'सुक खोबरं चटणी'
+      ]
+    },
+    {
+      id: 'drinks',
+      category: 'drinks',
+      badge: 'शीतपेय',
+      title: 'शीतपेय (Refreshing Drinks)',
+      subtitle: 'थंडगार व पाचक पारंपरिक पेये',
+      items: [
+        'आवळा सरबत', 'कोकम सरबत', 'लिंबू सरबत', 'कैरी पन्ह',
+        'जलजीरा', 'तिवळ', 'ताकतई', 'ताक', 'मठ्ठा', 'रसना फ्लेवर'
+      ]
+    }
+  ];
+
+  /* ============ STATE ============ */
+  // selectedItems: { "न्याहरी::कांदा पोहे": { category: "न्याहरी", name: "कांदा पोहे" } }
+  let selectedItems = {};
+  try { selectedItems = JSON.parse(localStorage.getItem('saiprasadCateringMenu')) || {}; } catch(e){ selectedItems = {}; }
+  let activeCategory = 'all';
+  let searchQuery = '';
+
+  /* ============ DOM ============ */
+  const $ = id => document.getElementById(id);
+  const menuGrid = $('menuGrid');
+  const searchInput = $('searchInput');
+  const searchBtn = $('searchBtn');
+  const categoryContainer = $('categoryContainer');
+  const cartCountEl = $('cartCount');
+  const totalSelectedText = $('totalSelectedText');
+  const cartItemsEl = $('cartItems');
+  const stickyCart = $('stickyCart');
+  const cartPanel = $('cartPanel');
+  const cartOverlay = $('cartOverlay');
+  const closeCartBtn = $('closeCart');
+  const clearCartBtn = $('clearCartBtn');
+  const whatsappBtn = $('whatsappBtn');
+  const customerName = $('customerName');
+  const customerPhone = $('customerPhone');
+  const guestCount = $('guestCount');
+  const eventDate = $('eventDate');
+  const eventType = $('eventType');
+  const eventVenue = $('eventVenue');
+  const heroOrderBtn = $('heroOrderBtn');
+  const heroMenuBtn = $('heroMenuBtn');
+  const toastEl = $('toast');
+
+  const escapeHtml = str => String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+  let toastTimer;
+  function showToast(msg, icon){
+    toastEl.innerHTML = (icon ? '<i class="fas '+icon+'"></i>' : '') + '<span>' + escapeHtml(msg) + '</span>';
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+  }
+
+  /* ============ RENDER MENU ============ */
+  function renderMenu(){
+    const q = searchQuery.trim().toLowerCase();
+    let sectionsToRender = menuSections.filter(sec => activeCategory === 'all' || sec.category === activeCategory);
+
+    if (q){
+      sectionsToRender = sectionsToRender.map(sec => ({
+        ...sec,
+        items: sec.items.filter(item =>
+          item.toLowerCase().includes(q) ||
+          sec.title.toLowerCase().includes(q) ||
+          sec.badge.toLowerCase().includes(q)
+        )
+      })).filter(sec => sec.items.length > 0);
+    }
+
+    if (sectionsToRender.length === 0){
+      menuGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:#8B9AAB;"><i class="fas fa-search" style="font-size:3rem;color:var(--saffron);opacity:.4;display:block;margin-bottom:1rem;"></i><p style="font-size:1.1rem;">कोणताही पदार्थ सापडला नाही. कृपया दुसरे नाव शोधा.</p></div>';
+      return;
+    }
+
+    menuGrid.innerHTML = sectionsToRender.map(sec => {
+      const selectedInSec = sec.items.filter(name => selectedItems[sec.badge + '::' + name]).length;
+      return `
+        <article class="menu-card">
+          <div class="card-top-bar">
+            <span class="card-cat-badge">${escapeHtml(sec.badge)}</span>
+            <span class="card-count-badge">${sec.items.length} प्रकार</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">${escapeHtml(sec.title)}</h3>
+            <p class="card-subtitle">${escapeHtml(sec.subtitle)}</p>
+            <div class="items-chip-list">
+              ${sec.items.map(name => {
+                const key = sec.badge + '::' + name;
+                const isSelected = Boolean(selectedItems[key]);
+                return `
+                  <button type="button" class="dish-chip ${isSelected ? 'selected' : ''}" data-key="${escapeHtml(key)}" data-cat="${escapeHtml(sec.badge)}" data-name="${escapeHtml(name)}">
+                    <i class="fas ${isSelected ? 'fa-check-circle' : 'fa-plus-circle'}"></i>
+                    <span>${escapeHtml(name)}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            <div class="card-footer">
+              <span class="selected-hint">निवडलेले: <strong>${selectedInSec}</strong> / ${sec.items.length}</span>
+              <button type="button" class="select-all-btn" data-section="${sec.id}">
+                ${selectedInSec === sec.items.length ? 'सर्व काढा' : 'सर्व निवडा'}
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  /* ============ UPDATE CART UI ============ */
+  function updateCartUI(){
+    const keys = Object.keys(selectedItems);
+    cartCountEl.textContent = keys.length;
+    totalSelectedText.textContent = keys.length;
+
+    if (keys.length === 0){
+      cartItemsEl.innerHTML = '<div class="empty-cart"><i class="fas fa-clipboard-list"></i><span>अजून कोणताही पदार्थ निवडलेला नाही</span><span style="font-size:.82rem;color:#999;">मेनूमधील पदार्थांवर क्लिक करून तुमची यादी तयार करा.</span></div>';
+    } else {
+      cartItemsEl.innerHTML = keys.map(key => {
+        const entry = selectedItems[key];
+        return `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <span class="cart-item-title">${escapeHtml(entry.name)}</span>
+              <span class="cart-item-cat">${escapeHtml(entry.category)}</span>
+            </div>
+            <button type="button" class="remove-item-btn" data-remove="${escapeHtml(key)}" aria-label="पदार्थ काढा">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    try { localStorage.setItem('saiprasadCateringMenu', JSON.stringify(selectedItems)); } catch(e){}
+  }
+
+  /* ============ EVENTS ============ */
+  menuGrid.addEventListener('click', e => {
+    const chip = e.target.closest('.dish-chip');
+    if (chip){
+      const { key, cat, name } = chip.dataset;
+      if (selectedItems[key]){
+        delete selectedItems[key];
+        showToast(name + ' यादीतून काढले', 'fa-minus-circle');
+      } else {
+        selectedItems[key] = { category: cat, name: name };
+        showToast(name + ' मेनूमध्ये जोडले', 'fa-check-circle');
+      }
+      renderMenu();
+      updateCartUI();
+      return;
+    }
+
+    const secBtn = e.target.closest('.select-all-btn');
+    if (secBtn){
+      const sec = menuSections.find(s => s.id === secBtn.dataset.section);
+      if (!sec) return;
+      const allSelected = sec.items.every(name => selectedItems[sec.badge + '::' + name]);
+      if (allSelected){
+        sec.items.forEach(name => delete selectedItems[sec.badge + '::' + name]);
+        showToast(sec.badge + ' मधील सर्व पदार्थ काढले', 'fa-info-circle');
+      } else {
+        sec.items.forEach(name => { selectedItems[sec.badge + '::' + name] = { category: sec.badge, name: name }; });
+        showToast(sec.badge + ' मधील सर्व पदार्थ निवडले', 'fa-check');
+      }
+      renderMenu();
+      updateCartUI();
+    }
+  });
+
+  cartItemsEl.addEventListener('click', e => {
+    const rem = e.target.closest('button[data-remove]');
+    if (!rem) return;
+    const key = rem.dataset.remove;
+    delete selectedItems[key];
+    renderMenu();
+    updateCartUI();
+  });
+
+  clearCartBtn.addEventListener('click', () => {
+    selectedItems = {};
+    renderMenu();
+    updateCartUI();
+    showToast('सर्व निवडलेले पदार्थ काढले', 'fa-trash');
+  });
+
+  categoryContainer.addEventListener('click', e => {
+    const btn = e.target.closest('.cat-btn');
+    if (!btn) return;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCategory = btn.dataset.category;
+    renderMenu();
+  });
+
+  function performSearch(){
+    searchQuery = searchInput.value;
+    renderMenu();
+  }
+  searchBtn.addEventListener('click', performSearch);
+  searchInput.addEventListener('input', performSearch);
+
+  function openCart(){
+    cartPanel.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCartPanel(){
+    cartPanel.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  stickyCart.addEventListener('click', openCart);
+  closeCartBtn.addEventListener('click', closeCartPanel);
+  cartOverlay.addEventListener('click', closeCartPanel);
+
+  /* ============ WHATSAPP ENQUIRY ============ */
+  whatsappBtn.addEventListener('click', () => {
+    const keys = Object.keys(selectedItems);
+    if (keys.length === 0){
+      showToast('कृपया किमान एक पदार्थ निवडा', 'fa-exclamation-circle');
+      return;
+    }
+
+    const name = customerName.value.trim();
+    const phone = customerPhone.value.trim();
+    const guests = guestCount.value.trim();
+    const date = eventDate.value;
+    const type = eventType.value;
+    const venue = eventVenue.value.trim();
+
+    if (!name){ showToast('कृपया तुमचे नाव टाका', 'fa-exclamation-circle'); customerName.focus(); return; }
+    if (!phone || !/^[\d+\-\s()]{6,}$/.test(phone)){ showToast('कृपया योग्य मोबाईल नंबर टाका', 'fa-exclamation-circle'); customerPhone.focus(); return; }
+
+    // Group items by category
+    const grouped = {};
+    keys.forEach(k => {
+      const { category, name: itemName } = selectedItems[k];
+      if (!grouped[category]) grouped[category] = [];
+      grouped[category].push(itemName);
+    });
+
+    let menuText = '';
+    Object.keys(grouped).forEach(cat => {
+      menuText += `\n*${cat}:*\n• ${grouped[cat].join(', ')}\n`;
+    });
+
+    let msg = `*SAIPRASAD Caterers & Decorators*\n`;
+    msg += `_नवीन केटरिंग मेनू चौकशी (Quotation)_\n\n`;
+    msg += `*नाव:* ${name}\n`;
+    msg += `*मोबाईल:* ${phone}\n`;
+    msg += `*कार्यक्रम:* ${type}\n`;
+    if (date) msg += `*तारीख:* ${date}\n`;
+    if (guests) msg += `*अंदाजे पाहुणे:* ${guests} जण\n`;
+    if (venue) msg += `*ठिकाण:* ${venue}\n`;
+    msg += `\n*निवडलेला महाराष्ट्रीयन मेनू (${keys.length} पदार्थ):*`;
+    msg += menuText;
+
+    const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    showToast('WhatsApp उघडत आहे...', 'fa-whatsapp');
+  });
+
+  heroOrderBtn.addEventListener('click', openCart);
+  heroMenuBtn.addEventListener('click', () => {
+    document.getElementById('menuSection').scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && cartPanel.classList.contains('open')) closeCartPanel();
+  });
+
+  renderMenu();
+  updateCartUI();
+})();
+</script>
+</body>
+</html>
