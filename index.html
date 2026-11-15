@@ -173,8 +173,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
 .hero-cta{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center}
 .btn-primary{background:var(--saffron);color:var(--navy);font-weight:700;padding:.9rem 2.2rem;border-radius:60px;font-size:1rem;display:inline-flex;align-items:center;gap:.6rem;box-shadow:0 6px 20px rgba(255,153,51,.4);transition:transform .25s var(--bounce),box-shadow .25s}
 .btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 28px rgba(255,153,51,.55)}
-.btn-outline{background:transparent;color:var(--cream);font-weight:600;padding:.9rem 2.2rem;border-radius:60px;font-size:1rem;display:inline-flex;align-items:center;gap:.6rem;border:2px solid rgba(255,248,231,.4);transition:all .25s var(--smooth)}
-.btn-outline:hover{border-color:var(--saffron);color:var(--saffron);background:rgba(255,153,51,.1)}
 .hero-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(230,57,70,.92);color:#fff;font-size:.78rem;font-weight:600;padding:.4rem 1.1rem;border-radius:40px;margin-bottom:.8rem;letter-spacing:.04em}
 
 /* ============ SEARCH & CATEGORIES ============ */
@@ -439,8 +437,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
       <h1 class="hero-title">पारंपरिक चव.<br><span class="highlight">शाही केटरिंग</span> मेनू.</h1>
       <p class="hero-sub">लग्न समारंभ, मुंज, साखरपुडा, वाढदिवस व सर्व शुभ कार्यांसाठी तुमचा आवडता महाराष्ट्रीयन मेनू निवडा आणि थेट WhatsApp वर कोटेशन मागवा.</p>
       <div class="hero-cta">
-        <button class="btn-primary" id="heroOrderBtn"><i class="fas fa-clipboard-list"></i> निवडलेला मेनू पहा</button>
-        <button class="btn-outline" id="heroMenuBtn"><i class="fas fa-book-open"></i> संपूर्ण मेनू पहा</button>
+        <button class="btn-primary" id="heroMenuBtn"><i class="fas fa-book-open"></i> संपूर्ण मेनू पहा</button>
       </div>
     </div>
   </div>
@@ -456,6 +453,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
     </div>
     <div class="categories" id="categoryContainer">
       <button class="cat-btn active" data-category="all"><i class="fas fa-asterisk"></i> सर्व विभाग</button>
+      <button class="cat-btn" data-category="drinks"><i class="fas fa-glass-water"></i> शीतपेय (Welcome Drinks)</button>
       <button class="cat-btn" data-category="nyahari"><i class="fas fa-sun"></i> न्याहरी</button>
       <button class="cat-btn" data-category="upvas"><i class="fas fa-leaf"></i> उपवासाचे पदार्थ</button>
       <button class="cat-btn" data-category="farsan"><i class="fas fa-fire"></i> फरसाण</button>
@@ -466,7 +464,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
       <button class="cat-btn" data-category="usal"><i class="fas fa-seedling"></i> उसळ प्रकार</button>
       <button class="cat-btn" data-category="salad"><i class="fas fa-lemon"></i> कोशिंबीर व पचडी</button>
       <button class="cat-btn" data-category="pickle"><i class="fas fa-pepper-hot"></i> लोणचं व चटणी</button>
-      <button class="cat-btn" data-category="drinks"><i class="fas fa-glass-water"></i> शीतपेय</button>
     </div>
   </div>
 
@@ -483,7 +480,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
 <button class="sticky-cart" id="stickyCart" aria-label="निवडलेला मेनू उघडा">
   <i class="fas fa-clipboard-check"></i>
   <span>निवडलेला मेनू</span>
-  <span class="cart-count" id="cartCount">0</span>
+  <span class="cart-count" id="cartCount">2</span>
 </button>
 
 <!-- CART PANEL -->
@@ -498,8 +495,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
     <div class="cart-items" id="cartItems"></div>
 
     <div class="clear-all-row">
-      <span>एकूण निवडलेले पदार्थ: <strong id="totalSelectedText" style="color:var(--chilli);">0</strong></span>
-      <button class="clear-btn" id="clearCartBtn">सर्व काढा</button>
+      <span>एकूण निवडलेले पदार्थ: <strong id="totalSelectedText" style="color:var(--chilli);">2</strong></span>
+      <button class="clear-btn" id="clearCartBtn">रीसेट करा (Default)</button>
     </div>
 
     <!-- EVENT & CUSTOMER DETAILS -->
@@ -548,8 +545,19 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
   /* ============ CONFIG ============ */
   const WHATSAPP_NUMBER = '919867782023';
 
-  /* ============ CATERING MENU DATA (FROM BROCHURE) ============ */
+  /* ============ CATERING MENU DATA (Welcome Drinks at #1) ============ */
   const menuSections = [
+    {
+      id: 'drinks',
+      category: 'drinks',
+      badge: 'शीतपेय',
+      title: 'शीतपेय (Welcome Drinks)',
+      subtitle: 'थंडगार व पाचक पारंपरिक स्वागत पेये',
+      items: [
+        'आवळा सरबत', 'कोकम सरबत', 'लिंबू सरबत', 'कैरी पन्ह',
+        'जलजीरा', 'तिवळ', 'ताकतई', 'ताक', 'मठ्ठा', 'रसना फ्लेवर'
+      ]
+    },
     {
       id: 'nyahari',
       category: 'nyahari',
@@ -557,6 +565,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
       title: 'न्याहरी (Breakfast & Snacks)',
       subtitle: 'सकाळच्या व संध्याकाळच्या नाश्त्याचे चविष्ट पदार्थ',
       items: [
+        'चहा (Tea)', 'कॉफी (Coffee)',
         'कांदा पोहे', 'बटाटा पोहे', 'उपिट', 'व्हेज उपिट', 'समोसा',
         'गोड शिरा', 'अननस शिरा', 'बटाटावडा', 'थालीपीठ', 'मिक्सभजी',
         'कांदा भजी', 'मिसळपाव', 'उसळपाव', 'कटवडा', 'कोथिंबीर वडी',
@@ -689,22 +698,19 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
         'पुणेरी चटणी', 'सोलापुरी शेंगदाणा चटणी', 'कोल्हापुरी चटणी',
         'सातारी चटणी', 'सुक खोबरं चटणी'
       ]
-    },
-    {
-      id: 'drinks',
-      category: 'drinks',
-      badge: 'शीतपेय',
-      title: 'शीतपेय (Refreshing Drinks)',
-      subtitle: 'थंडगार व पाचक पारंपरिक पेये',
-      items: [
-        'आवळा सरबत', 'कोकम सरबत', 'लिंबू सरबत', 'कैरी पन्ह',
-        'जलजीरा', 'तिवळ', 'ताकतई', 'ताक', 'मठ्ठा', 'रसना फ्लेवर'
-      ]
     }
   ];
 
-  /* ============ STATE (Always empty on refresh) ============ */
-  let selectedItems = {};
+  /* ============ DEFAULT ITEMS FOR EVERY ORDER ============ */
+  function getDefaultSelectedItems(){
+    return {
+      'न्याहरी::चहा (Tea)': { category: 'न्याहरी', name: 'चहा (Tea)' },
+      'न्याहरी::कॉफी (Coffee)': { category: 'न्याहरी', name: 'कॉफी (Coffee)' }
+    };
+  }
+
+  /* ============ STATE (Default Tea & Coffee on refresh) ============ */
+  let selectedItems = getDefaultSelectedItems();
   try { localStorage.removeItem('saiprasadCateringMenu'); } catch(e){}
   let activeCategory = 'all';
   let searchQuery = '';
@@ -730,7 +736,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
   const eventDate = $('eventDate');
   const eventType = $('eventType');
   const eventVenue = $('eventVenue');
-  const heroOrderBtn = $('heroOrderBtn');
   const heroMenuBtn = $('heroMenuBtn');
   const toastEl = $('toast');
 
@@ -744,9 +749,9 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
   }
 
-  /* ============ RESET / EMPTY CART HELPER ============ */
-  function emptyCart(){
-    selectedItems = {};
+  /* ============ RESET CART TO DEFAULT (TEA & COFFEE) ============ */
+  function resetCartToDefault(){
+    selectedItems = getDefaultSelectedItems();
     try { localStorage.removeItem('saiprasadCateringMenu'); } catch(e){}
     renderMenu();
     updateCartUI();
@@ -878,8 +883,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
   });
 
   clearCartBtn.addEventListener('click', () => {
-    emptyCart();
-    showToast('सर्व निवडलेले पदार्थ काढले', 'fa-trash');
+    resetCartToDefault();
+    showToast('मेनू रीसेट केला (चहा व कॉफी सेट आहे)', 'fa-rotate-left');
   });
 
   categoryContainer.addEventListener('click', e => {
@@ -955,13 +960,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
     const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
     window.open(url, '_blank');
 
-    // Automatically empty cart & close drawer after sending to WhatsApp
-    emptyCart();
+    // Reset cart back to default (Tea & Coffee) after sending to WhatsApp
+    resetCartToDefault();
     closeCartPanel();
-    showToast('मेनू WhatsApp वर पाठवला व कार्ट रिकामी केली आहे!', 'fa-whatsapp');
+    showToast('मेनू WhatsApp वर पाठवला व नवीन ऑर्डरसाठी कार्ट रीसेट केली आहे!', 'fa-whatsapp');
   });
 
-  heroOrderBtn.addEventListener('click', openCart);
   heroMenuBtn.addEventListener('click', () => {
     document.getElementById('menuSection').scrollIntoView({ behavior:'smooth', block:'start' });
   });
