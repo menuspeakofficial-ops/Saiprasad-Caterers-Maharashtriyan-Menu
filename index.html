@@ -703,10 +703,9 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
     }
   ];
 
-  /* ============ STATE ============ */
-  // selectedItems: { "न्याहरी::कांदा पोहे": { category: "न्याहरी", name: "कांदा पोहे" } }
+  /* ============ STATE (Always empty on refresh) ============ */
   let selectedItems = {};
-  try { selectedItems = JSON.parse(localStorage.getItem('saiprasadCateringMenu')) || {}; } catch(e){ selectedItems = {}; }
+  try { localStorage.removeItem('saiprasadCateringMenu'); } catch(e){}
   let activeCategory = 'all';
   let searchQuery = '';
 
@@ -743,6 +742,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
     toastEl.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+  }
+
+  /* ============ RESET / EMPTY CART HELPER ============ */
+  function emptyCart(){
+    selectedItems = {};
+    try { localStorage.removeItem('saiprasadCateringMenu'); } catch(e){}
+    renderMenu();
+    updateCartUI();
   }
 
   /* ============ RENDER MENU ============ */
@@ -825,8 +832,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
         `;
       }).join('');
     }
-
-    try { localStorage.setItem('saiprasadCateringMenu', JSON.stringify(selectedItems)); } catch(e){}
   }
 
   /* ============ EVENTS ============ */
@@ -873,9 +878,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
   });
 
   clearCartBtn.addEventListener('click', () => {
-    selectedItems = {};
-    renderMenu();
-    updateCartUI();
+    emptyCart();
     showToast('सर्व निवडलेले पदार्थ काढले', 'fa-trash');
   });
 
@@ -951,7 +954,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--saffron);box-shadow:0
 
     const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
     window.open(url, '_blank');
-    showToast('WhatsApp उघडत आहे...', 'fa-whatsapp');
+
+    // Automatically empty cart & close drawer after sending to WhatsApp
+    emptyCart();
+    closeCartPanel();
+    showToast('मेनू WhatsApp वर पाठवला व कार्ट रिकामी केली आहे!', 'fa-whatsapp');
   });
 
   heroOrderBtn.addEventListener('click', openCart);
